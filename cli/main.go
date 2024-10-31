@@ -49,7 +49,6 @@ func startChat() {
 	// Send messages from CLI
 	reader := bufio.NewReader(os.Stdin)
 	for {
-		fmt.Print("")
 		message, _ := reader.ReadString('\n')
 
 		// clear the input of this message so it doesn't show up in the chat duplicated with the same server message
