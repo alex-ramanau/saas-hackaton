@@ -56,7 +56,7 @@ func startChat() {
  /####################/#################\
 /###################/####################\`)
 
-	println("Be ware of those thirsty for blood! 🧛")
+	println("Be ware of those thirsty for blood 🧛")
 
 	// Start a goroutine to receive messages
 	go func() {

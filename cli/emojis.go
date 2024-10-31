@@ -139,4 +139,5 @@ var emojiMap = map[string]string{
 	":peanuts:":      "🥜",
 	":bread:":        "🍞",
 	":cucumber:":     "🥒",
+	":vampire:":      "🧛",
 }
