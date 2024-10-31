@@ -33,18 +33,16 @@ func startChat() {
 	// Start a goroutine to receive messages
 	go func() {
 		for {
-			_, message, err := conn.ReadMessage()
+			_, recv, err := conn.ReadMessage()
 			if err != nil {
 				log.Println("Error reading message:", err)
 				return
 			}
 
 			// convert emojis syntax to actual emojis
-			for key, value := range emojis {
-				message = []byte(strings.Replace(string(message), key, value, -1))
-			}
+			message := replaceEmojis(string(recv))
 
-			fmt.Println("User:", string(message))
+			fmt.Println("User:", message)
 		}
 	}()
 
@@ -63,12 +61,19 @@ func startChat() {
 }
 
 // list of allowed emojis using :emoji: syntax
-var emojis = map[string]string{
+var emojiMap = map[string]string{
 	":smile:":  "😊",
 	":laugh:":  "😂",
 	":scared:": "😱",
 	":sad:":    "😢",
 	":angry:":  "😠",
+}
+
+func replaceEmojis(message string) string {
+	for k, v := range emojiMap {
+		message = strings.ReplaceAll(message, k, v)
+	}
+	return message
 }
 
 func main() {
