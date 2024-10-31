@@ -140,4 +140,7 @@ var emojiMap = map[string]string{
 	":bread:":        "🍞",
 	":cucumber:":     "🥒",
 	":vampire:":      "🧛",
+	":blood:":        "🩸",
+	":zombie:":       "🧟",
+	":sword:":        "🗡️",
 }
