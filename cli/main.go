@@ -54,7 +54,8 @@ func startChat() {
 		fmt.Print("")
 		message, _ := reader.ReadString('\n')
 
-		fmt.Print("\033[1A\033[K") // clear the input of this message
+		// clear the input of this message so it doesn't show up in the chat duplicated with the same server message
+		fmt.Print("\033[1A\033[K")
 
 		conn.WriteMessage(websocket.TextMessage, []byte(message))
 
