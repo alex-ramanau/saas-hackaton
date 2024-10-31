@@ -14,7 +14,6 @@ type ServerVariables struct{
 	ListenPort string
 }
 
-//TODO: REMOVE
 func serveHome(w http.ResponseWriter, r *http.Request) {
 	log.Println(r.URL)
 	if r.URL.Path != "/" {
@@ -48,8 +47,7 @@ func main() {
 	// Init the chat room as a coroutine
 	go room.run()
 	
-	//TODO: REMOVE IT
-	http.HandleFunc("/", serveHome)
+	//TOOD
 
 	// Main endpoint for the client to connect to the room
 	http.HandleFunc("/room", func(w http.ResponseWriter, r *http.Request) {
