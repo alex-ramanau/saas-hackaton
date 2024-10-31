@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/gorilla/websocket"
 )
@@ -37,6 +38,12 @@ func startChat() {
 				log.Println("Error reading message:", err)
 				return
 			}
+
+			// convert emojis syntax to actual emojis
+			for key, value := range emojis {
+				message = []byte(strings.Replace(string(message), key, value, -1))
+			}
+
 			fmt.Println("User:", string(message))
 		}
 	}()
@@ -52,6 +59,15 @@ func startChat() {
 		conn.WriteMessage(websocket.TextMessage, []byte(message))
 
 	}
+}
+
+// list of allowed emojis using :emoji: syntax
+var emojis = map[string]string{
+	":smile:":  "😊",
+	":laugh:":  "😂",
+	":scared:": "😱",
+	":sad:":    "😢",
+	":angry:":  "😠",
 }
 
 func main() {
