@@ -42,7 +42,8 @@ func startChat() {
 			// convert emojis syntax to actual emojis
 			message := replaceEmojis(string(recv))
 
-			fmt.Println("User:", message)
+			// instead of lack of features, we like to call it a "privacy feature"! everyone is anonymous :)
+			fmt.Println("Anon:", message)
 		}
 	}()
 
