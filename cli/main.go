@@ -60,15 +60,6 @@ func startChat() {
 	}
 }
 
-// list of allowed emojis using :emoji: syntax
-var emojiMap = map[string]string{
-	":smile:":  "😊",
-	":laugh:":  "😂",
-	":scared:": "😱",
-	":sad:":    "😢",
-	":angry:":  "😠",
-}
-
 func replaceEmojis(message string) string {
 	for k, v := range emojiMap {
 		message = strings.ReplaceAll(message, k, v)
