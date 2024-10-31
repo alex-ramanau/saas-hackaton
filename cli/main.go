@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 
 	"github.com/gorilla/websocket"
 )
@@ -110,6 +112,20 @@ func replaceEmojis(message string) string {
 }
 
 func main() {
+	// Handle SIGINT and SIGTERM
+	signalChan := make(chan os.Signal, 1)
+	signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM)
+
+	// goroutine to handle signals and reset color on exit
+	go func() {
+		<-signalChan // Wait for an interrupt signal
+		fmt.Println()
+		fmt.Print("\033[1A\033[K") // so ^C doesnt show up
+		fmt.Print(Reset)           // Reset color on exit
+		fmt.Println("\nExiting...")
+		os.Exit(0)
+	}()
+
 	registerUser()
 	startChat()
 }
