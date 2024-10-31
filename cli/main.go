@@ -52,12 +52,54 @@ func startChat() {
 	for {
 		message, _ := reader.ReadString('\n')
 
+		// check if message is empty
+		if message == "\n" {
+			fmt.Print("\033[1A\033[K")
+			continue
+		}
+
+		// Check if the message is a command
+		if strings.HasPrefix(message, "/") {
+			changeColor(message)
+			continue // Skip sending the command as a message
+		}
+
 		// clear the input of this message so it doesn't show up in the chat duplicated with the same server message
 		fmt.Print("\033[1A\033[K")
 
 		conn.WriteMessage(websocket.TextMessage, []byte(message))
 
 	}
+}
+
+const (
+	Reset   = "\033[0m"
+	Red     = "\033[31m"
+	Green   = "\033[32m"
+	Yellow  = "\033[33m"
+	Blue    = "\033[34m"
+	Magenta = "\033[35m"
+	Cyan    = "\033[36m"
+	White   = "\033[37m"
+)
+
+var colorMap = map[string]string{
+	"/red":     Red,
+	"/green":   Green,
+	"/yellow":  Yellow,
+	"/blue":    Blue,
+	"/magenta": Magenta,
+	"/cyan":    Cyan,
+	"/white":   White,
+}
+
+func changeColor(command string) {
+	color := strings.TrimSpace(strings.ToLower(command))
+	if colorCode, exists := colorMap[color]; exists {
+		fmt.Print(colorCode)
+		return
+	}
+	fmt.Print(Reset)
 }
 
 func replaceEmojis(message string) string {
