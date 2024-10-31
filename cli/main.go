@@ -26,7 +26,7 @@ func registerUser() {
 
 func startChat() {
 	// Connect to WebSocket server
-	conn, _, err := websocket.DefaultDialer.Dial("ws://localhost:8080/ws", nil)
+	conn, _, err := websocket.DefaultDialer.Dial("ws://18.197.151.147:80/room", nil)
 	if err != nil {
 		log.Fatal("Error connecting to WebSocket server:", err)
 	}
