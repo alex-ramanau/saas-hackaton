@@ -1,0 +1,54 @@
+# This file configures Charmcraft.
+# See https://juju.is/docs/sdk/charmcraft-config for guidance.
+
+# (Required)
+name: dark-antichat-machine
+
+
+# (Required)
+type: charm
+
+
+# (Recommended)
+title: Dark Antichat
+
+
+# (Required)
+summary: Chat for evil spirits talks via websocketd and magic JTTP.
+
+
+# (Required)
+description: |
+  A simple chat for vampires, witches and other evil spirits. Should work fine
+  both for online and offline setups. For airgapped setup it uses JTTP protocol(
+  not implemented yet). JTTP mean Juju Text Transport Protocol.
+
+base: ubuntu@24.04
+
+platforms:
+  amd64:
+    build-on: amd64
+    build-for: amd64
+
+# (Required for 'charm' type)
+#bases:
+#  - build-on: 
+#      - name: ubuntu
+#        channel: "24.04"
+#    run-on:
+#      - name: ubuntu
+#        channel: "24.04"
+
+
+# (Optional) Configuration options for the charm
+# This config section defines charm config options, and populates the Configure
+# tab on Charmhub.
+# More information on this section at https://juju.is/docs/sdk/charmcraft-yaml#heading--config
+# General configuration documentation: https://juju.is/docs/sdk/config
+config:
+  options:
+    # An example config option to customise the log level of the workload
+    dark-chat-listen-port:
+      description: The listen port for the service.
+      type: int
+      default: 8080
